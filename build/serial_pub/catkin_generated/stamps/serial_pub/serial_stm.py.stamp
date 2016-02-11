@@ -29,13 +29,13 @@ def serialInit():
 
 def sendSerial(velo_r, velo_l, dir_):
     global ser
-    print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(velo_r, velo_l, dir_))
+    # print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(velo_r, velo_l, dir_))
     velo_l1 = int(velo_l)
     velo_l2 = int(round((velo_l-velo_l1)*10000))
 
     velo_r1 = int(velo_r)
     velo_r2 = int(round((velo_r-velo_r1)*10000))
-    
+
     data1=velo_l1.to_bytes(1, byteorder = "little", signed = True)
     a1H=data1[0]
     data2=velo_l2.to_bytes(2, byteorder = "little", signed = True)
@@ -56,8 +56,16 @@ def sendSerial(velo_r, velo_l, dir_):
 def receiveSerial():
     global ser
     try:
-        ser.flush()
-        data=ser.read(23)
+        data=ser.read(25)
+        rospy.loginfo("")
+        # print("data[-1]: {}, data[-2]: {}".format(data[-1], data[-2]))
+        if not (data[-1]==127) and (data[-2]==27):
+            print(create_error)
+        # data = ser.readline(-1)
+        # ser.flush()
+        ser.flushInput()
+        # print(data)
+        # print("len: {}, inWaiting: {}".format(len(data), ser.inWaiting()))
         receiveData=processDataSer(data)
         return receiveData
     except:
@@ -113,7 +121,7 @@ def putDataSerial(_put_ser):
     global put_ser
     # put_ser=_put_ser
     # put_ser = 123
-    print("putDataSerial: {}".format(put_ser))
+    # print("putDataSerial: {}".format(put_ser))
     return put_ser
 
 def teleop_key_Callback(teleop):
@@ -138,27 +146,26 @@ def main():
         get_ser = receiveSerial()
         
         # 0.00015708: encoder -> quang duong(m)
-        v_left = get_ser[0]*(dt/0.005)*0.00015708 # (m/s)
-        v_right = get_ser[1]*(dt/0.005)*0.00015708
+        v_right = get_ser[0]*(dt/0.005)*0.00015708 # (m/s)
+        v_left = get_ser[1]*(dt/0.005)*0.00015708
 
         get_ser[0] = get_ser[0]*(dt/0.005)*0.00015708
         get_ser[1] = get_ser[1]*(dt/0.005)*0.00015708
 
-
-        vx = ((v_left+v_right)/2) # *10 # (m/s)
+        vx = -((v_left+v_right)/2)*10 # *10 # (m/s)
         vy = 0
-        vth = ((v_left-v_right)/0.2275)*(-1) # *10 # (rad/s)
+        vth = ((v_left-v_right)/0.2275)*(-10) # *10 # (rad/s)
 
-        delta_y = (vx*cos(th))*dt
-        delta_x = (vx*sin(th))*dt
+        delta_x = (vx*cos(th))*dt
+        delta_y = (vx*sin(th))*dt
         delta_th = vth*dt
 
         x += delta_x
         y += delta_y
         th += delta_th
-        print("\033c")
-        print(len(get_ser))
-        print("\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)".format(vx, vy, vth, delta_x, delta_y, delta_y, x, y, th*180/pi))
+        # print("\033c")
+        # print(len(get_ser))
+        # print("\nv_right: {}\nv_left: {}\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)".format(v_right, v_left, vx, vy, vth, delta_x, delta_y, delta_y, x, y, th))
 
         get_ser[-1] = vth
         get_ser[-2] = vy
@@ -167,7 +174,7 @@ def main():
         get_ser[-5] = x
         get_ser[-6] = th
 
-        print("putser: {}".format(put_ser))
+        # print("putser: {}".format(put_ser))
         try:
             sendSerial(put_ser[0],put_ser[1], put_ser[2])
         except:

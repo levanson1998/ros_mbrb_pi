@@ -108,7 +108,7 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
-catkin_install_python(PROGRAMS scripts/serial_pub.py scripts/serial_stm.py
+catkin_install_python(PROGRAMS scripts/serial_pub.py scripts/serial_stm.py scripts/clock_pub.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

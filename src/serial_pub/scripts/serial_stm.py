@@ -29,13 +29,13 @@ def serialInit():
 
 def sendSerial(velo_r, velo_l, dir_):
     global ser
-    print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(velo_r, velo_l, dir_))
+    # print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(velo_r, velo_l, dir_))
     velo_l1 = int(velo_l)
     velo_l2 = int(round((velo_l-velo_l1)*10000))
 
     velo_r1 = int(velo_r)
     velo_r2 = int(round((velo_r-velo_r1)*10000))
-    
+
     data1=velo_l1.to_bytes(1, byteorder = "little", signed = True)
     a1H=data1[0]
     data2=velo_l2.to_bytes(2, byteorder = "little", signed = True)
@@ -56,12 +56,16 @@ def sendSerial(velo_r, velo_l, dir_):
 def receiveSerial():
     global ser
     try:
-        data=ser.read(24)
+        data=ser.read(25)
+        # rospy.loginfo("")
+        # print("data[-1]: {}, data[-2]: {}".format(data[-1], data[-2]))
+        if not ((data[-1]==27) and (data[0]==127)):
+            print(create_error)
         # data = ser.readline(-1)
         # ser.flush()
         ser.flushInput()
         # print(data)
-        print("len: {}, inWaiting: {}".format(len(data), ser.inWaiting()))
+        # print("len: {}, inWaiting: {}".format(len(data), ser.inWaiting()))
         receiveData=processDataSer(data)
         return receiveData
     except:
@@ -94,13 +98,13 @@ def processDataSer(data):
     # print(data)
     # print(len(data))
     dataRecv=[]
-    dataRecv.append(int.from_bytes(data[0:2], 'big', signed=True))
-    dataRecv.append(int.from_bytes(data[2:4], 'big', signed=True))
-    for i in range(4, 13, 3):
+    dataRecv.append(int.from_bytes(data[1:3], 'big', signed=True))
+    dataRecv.append(int.from_bytes(data[3:5], 'big', signed=True))
+    for i in range(5, 14, 3):
         dataRecv.append(int.from_bytes(data[i:i+3], 'big', signed=True)/1000)
-    for i in range(13, 22, 3):
+    for i in range(14, 23, 3):
         dataRecv.append(int.from_bytes(data[i:i+3], 'big', signed=True)/1000)
-    dataRecv.append(data[22])
+    dataRecv.append(data[23])
     dataRecv.append(0.0) # th
     dataRecv.append(0.0) # x
     dataRecv.append(0.0) # y
@@ -117,7 +121,7 @@ def putDataSerial(_put_ser):
     global put_ser
     # put_ser=_put_ser
     # put_ser = 123
-    print("putDataSerial: {}".format(put_ser))
+    # print("putDataSerial: {}".format(put_ser))
     return put_ser
 
 def teleop_key_Callback(teleop):
@@ -160,8 +164,8 @@ def main():
         y += delta_y
         th += delta_th
         # print("\033c")
-        print(len(get_ser))
-        print("\nv_right: {}\nv_left: {}\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)".format(v_right, v_left, vx, vy, vth, delta_x, delta_y, delta_y, x, y, th))
+        # print(len(get_ser))
+        # print("\nv_right: {}\nv_left: {}\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)".format(v_right, v_left, vx, vy, vth, delta_x, delta_y, delta_y, x, y, th))
 
         get_ser[-1] = vth
         get_ser[-2] = vy
@@ -170,7 +174,7 @@ def main():
         get_ser[-5] = x
         get_ser[-6] = th
 
-        print("putser: {}".format(put_ser))
+        # print("putser: {}".format(put_ser))
         try:
             sendSerial(put_ser[0],put_ser[1], put_ser[2])
         except:

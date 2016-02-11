@@ -55,3 +55,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/serial_pub" TYPE PROGRAM FILES "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_stm.py")
 endif()
 
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/serial_pub" TYPE PROGRAM FILES "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/clock_pub.py")
+endif()
+
