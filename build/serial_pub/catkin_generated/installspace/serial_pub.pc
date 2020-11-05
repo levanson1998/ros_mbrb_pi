@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/ros_mbrb/install
+
+Name: serial_pub
+Description: Description of serial_pub
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
