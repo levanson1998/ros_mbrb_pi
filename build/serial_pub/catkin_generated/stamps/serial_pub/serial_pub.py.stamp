@@ -8,7 +8,9 @@ import struct
 import time
 import math
 from std_msgs.msg import Float32
-from sensor_msgs.msg import Imu
+from sensor_msgs.msg import Imu, JointState
+from nav_msgs.msg import Odometry
+from turtlebot3_msgs.msg import SensorState
 # from your_package.msg import Foo
 
 
@@ -61,7 +63,7 @@ def transmitSerial():
     # ser.write(packet)
     try:
         receiveData = ser.read(11)
-        rospy.loginfo("receive serial: {}".format(receiveData))
+        # rospy.loginfo("receive serial: {}".format(receiveData))
         return receiveData
     except:
         rospy.loginfo("serial no data !!!")
@@ -74,25 +76,65 @@ def transmitSerial():
 #-----------------------END SERIAL---------------------------
 
 def main():
-    rospy.loginfo("serial publisher !!")
     rospy.init_node('serial_pub', anonymous=True)
-    imu_pub = rospy.Publisher('imu_in', Float32, queue_size=150)
+    Imu_pub = rospy.Publisher('imu', Imu, queue_size=5)
+    Odom_pub = rospy.Publisher('odom', Odometry, queue_size=5)
+    SensorState_pub = rospy.Publisher('sensor_state', SensorState, queue_size=5)
+    JointState_pub = rospy.Publisher('joint_states', JointState, queue_size=5)
+
+    rospy.loginfo("Publishing Imu at: " + Imu_pub.resolved_name)
     serialInit()
+    imu_=Imu()
+    odom_=Odometry()
+    ss_State_=SensorState()
+    joint_state_=JointState()
     while(True):
         data_ser=transmitSerial()
-        imu_=Imu()
-        imu_.header.stamp=time.time()
-        imu_.header.frame_id='imu'
+
+        stamp=rospy.Time.now()
+        odom_.header.stamp=stamp
+        odom_.header.frame_id='odom'
+        odom_.child_frame_id='base_footprint'
+        odom_.pose.pose.position.x=1.3
+        odom_.pose.pose.position.y=2.4
+        odom_.pose.pose.position.z=3.5
+        odom_.twist.twist.linear.x=3.6
+        odom_.twist.twist.angular.z=4.9
+
+        ss_State_.header.stamp=stamp
+        ss_State_.left_encoder=20
+        ss_State_.right_encoder=30
+
+        joint_state_.header.stamp=stamp
+        joint_state_.header.frame_id='map'
+        joint_state_.name=["wheel_left_joint", "wheel_right_joint"]
+        joint_state_.position=[2,3]
+        joint_state_.velocity=[2,3]
+        joint_state_.effort=[2,3]
+
+        imu_.header.stamp=rospy.Time.now()
+        imu_.header.frame_id='map'
 
 
-        imu_.linear_acceleration.x =int.from_bytes(data_ser[4:7], "big")
-        imu_.linear_acceleration.y=int.from_bytes(data_ser[7:10], "big")
-        imu_.linear_acceleration.z=int.from_bytes(data_ser[10:13], "big")
-        imu_.angular_velocity.x=int.from_bytes(data_ser[13:16], "big")
-        imu_.angular_velocity.y=int.from_bytes(data_ser[16:19], "big")
-        imu_.angular_velocity.z=int.from_bytes(data_ser[19:22], "big")
+        # imu_.linear_acceleration.x =int.from_bytes(data_ser[4:7], "big")
+        # imu_.linear_acceleration.y=int.from_bytes(data_ser[7:10], "big")
+        # imu_.linear_acceleration.z=int.from_bytes(data_ser[10:13], "big")
+        # imu_.angular_velocity.x=int.from_bytes(data_ser[13:16], "big")
+        # imu_.angular_velocity.y=int.from_bytes(data_ser[16:19], "big")
+        # imu_.angular_velocity.z=int.from_bytes(data_ser[19:22], "big")
 
-        imu_pub.publish(imu_)
+        imu_.linear_acceleration.x=0.2 
+        imu_.linear_acceleration.y=3.2
+        imu_.linear_acceleration.z=5.6
+        imu_.angular_velocity.x=1.023
+        imu_.angular_velocity.y=2.36
+        imu_.angular_velocity.z=3.37
+
+        Imu_pub.publish(imu_)
+        Odom_pub.publish(odom_)
+        SensorState_pub.publish(ss_State_)
+        JointState_pub.publish(joint_state_
+        )
         if rospy.is_shutdown():
             rospy.loginfo("stop serial publisher")
             break
