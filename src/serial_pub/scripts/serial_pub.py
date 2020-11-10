@@ -100,7 +100,7 @@ def main():
     y = 0.0
     th = 0.0
     vx = 0.0
-    vy = 0.0
+    vy = 0.1
     vth = 0.0
     last_time = rospy.Time.now()
     while(True):
@@ -140,8 +140,8 @@ def main():
         transform_.header.stamp=stamp
         transform_.header.frame_id='odom'
         transform_.child_frame_id='base_footprint'
-        transform_.transform.translation.x=x
-        transform_.transform.translation.y=y
+        transform_.transform.translation.x=0.0
+        transform_.transform.translation.y=0.0
         transform_.transform.translation.z=0.0
         transform_.transform.rotation = odom_squat
 
