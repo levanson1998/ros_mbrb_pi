@@ -7,7 +7,7 @@
 subdirs(gtest)
 subdirs(turtlebot3/turtlebot3)
 subdirs(turtlebot3_msgs)
-subdirs(serial_pub)
 subdirs(hls_lfcd_lds_driver)
 subdirs(rplidar_ros)
+subdirs(serial_pub)
 subdirs(turtlebot3/turtlebot3_bringup)

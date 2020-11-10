@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
-
 import rospy
 import numpy as np
 import serial
 import os
 import struct
 import time
-import math
+from math import cos, sin, pi
 from std_msgs.msg import Float32
 from sensor_msgs.msg import Imu, JointState
 from nav_msgs.msg import Odometry
 from turtlebot3_msgs.msg import SensorState
+from geometry_msgs.msg import TransformStamped, Quaternion
+import tf
+import tf2_ros
+import tf_conversions
 # from your_package.msg import Foo
 
+# tf.transformations.quaternion_from_euler
 
 def DEG2RAD(deg):
-    return deg*math.pi/180
+    return deg*pi/180
 
 def RAD2DEG(rad):
-    return rad*180/math.pi
+    return rad*180/pi
 
 #-----------------------BEGIN SERIAL---------------------------
 time_t = 0.1
@@ -88,32 +92,64 @@ def main():
     odom_=Odometry()
     ss_State_=SensorState()
     joint_state_=JointState()
+    transform_ = TransformStamped()
+    # tf_=tf.TransformBroadcaster()
+    # transformer_=tf.Transformer(True, rospy.Duration(10.0))
+    transformer_=tf2_ros.TransformBroadcaster()
+    x = 0.0
+    y = 0.0
+    th = 0.0
+    vx = 0.0
+    vy = 0.0
+    vth = 0.0
+    last_time = rospy.Time.now()
     while(True):
-        data_ser=transmitSerial()
+        # data_ser=transmitSerial()
 
         stamp=rospy.Time.now()
+        dt = (last_time-stamp).to_sec()
+        delta_x = (vx*cos(th)-vy*sin(th))*dt
+        delta_y = (vx*sin(th)+vy*cos(th))*dt
+        delta_th = vth*dt
+
+        x += delta_x
+        y += delta_y
+        th += delta_th
+
         odom_.header.stamp=stamp
         odom_.header.frame_id='odom'
-        odom_.child_frame_id='base_footprint'
-        odom_.pose.pose.position.x=1.3
-        odom_.pose.pose.position.y=2.4
-        odom_.pose.pose.position.z=3.5
+        odom_.child_frame_id='base_link'
+        odom_.pose.pose.position.x=x
+        odom_.pose.pose.position.y=y
+        odom_.pose.pose.position.z=0
         odom_.twist.twist.linear.x=3.6
         odom_.twist.twist.angular.z=4.9
 
         ss_State_.header.stamp=stamp
-        ss_State_.left_encoder=20
-        ss_State_.right_encoder=30
+        ss_State_.left_encoder=10
+        ss_State_.right_encoder=10
 
         joint_state_.header.stamp=stamp
-        joint_state_.header.frame_id='map'
+        joint_state_.header.frame_id='base_link'
         joint_state_.name=["wheel_left_joint", "wheel_right_joint"]
-        joint_state_.position=[2,3]
-        joint_state_.velocity=[2,3]
-        joint_state_.effort=[2,3]
+        joint_state_.position=[0,0]
+        joint_state_.velocity=[0.1,0.1]
+        joint_state_.effort=[0.1,0.1]
+
+        odom_squat = Quaternion(*(tf_conversions.transformations.quaternion_from_euler(0, 0, th)))
+        transform_.header.stamp=stamp
+        transform_.header.frame_id='odom'
+        transform_.child_frame_id='base_footprint'
+        transform_.transform.translation.x=x
+        transform_.transform.translation.y=y
+        transform_.transform.translation.z=0.0
+        transform_.transform.rotation = odom_squat
+
+        
+        transformer_.sendTransform(transform_)
 
         imu_.header.stamp=rospy.Time.now()
-        imu_.header.frame_id='map'
+        imu_.header.frame_id='imu_link'
 
 
         # imu_.linear_acceleration.x =int.from_bytes(data_ser[4:7], "big")
@@ -133,8 +169,7 @@ def main():
         Imu_pub.publish(imu_)
         Odom_pub.publish(odom_)
         SensorState_pub.publish(ss_State_)
-        JointState_pub.publish(joint_state_
-        )
+        JointState_pub.publish(joint_state_)
         if rospy.is_shutdown():
             rospy.loginfo("stop serial publisher")
             break

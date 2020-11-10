@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/ros_mbrb/devel
+
+Name: tf2_eigen
+Description: Description of tf2_eigen
+Version: 0.6.5
+Cflags: -I/home/ubuntu/ros_mbrb/src/src/geometry2/tf2_eigen/include -I/usr/include/eigen3
+Libs: -L${prefix}/lib 
+Requires: 

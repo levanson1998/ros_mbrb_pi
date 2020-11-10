@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/ubuntu/ros_mbrb/build
 include turtlebot3_msgs/CMakeFiles/_turtlebot3_msgs_generate_messages_check_deps_VersionInfo.dir/progress.make
 
 turtlebot3_msgs/CMakeFiles/_turtlebot3_msgs_generate_messages_check_deps_VersionInfo:
-	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py turtlebot3_msgs /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg 
+	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py turtlebot3_msgs /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg 
 
 _turtlebot3_msgs_generate_messages_check_deps_VersionInfo: turtlebot3_msgs/CMakeFiles/_turtlebot3_msgs_generate_messages_check_deps_VersionInfo
 _turtlebot3_msgs_generate_messages_check_deps_VersionInfo: turtlebot3_msgs/CMakeFiles/_turtlebot3_msgs_generate_messages_check_deps_VersionInfo.dir/build.make
