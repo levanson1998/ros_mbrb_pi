@@ -494,6 +494,12 @@ serial_pub_BINARY_DIR:STATIC=/home/ubuntu/ros_mbrb/build/serial_pub
 //Value Computed by CMake
 serial_pub_SOURCE_DIR:STATIC=/home/ubuntu/ros_mbrb/src/serial_pub
 
+//Value Computed by CMake
+serial_stm_BINARY_DIR:STATIC=/home/ubuntu/ros_mbrb/build/serial_stm
+
+//Value Computed by CMake
+serial_stm_SOURCE_DIR:STATIC=/home/ubuntu/ros_mbrb/src/serial_stm
+
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/kinetic/share/std_msgs/cmake
 
@@ -754,7 +760,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=9
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=10
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

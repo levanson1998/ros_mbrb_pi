@@ -8,3 +8,4 @@
 
 # modified environment variables
 export PWD="/home/ubuntu/ros_mbrb/build"
+export PYTHONPATH="/home/ubuntu/ros_mbrb/devel/lib/python3/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages"

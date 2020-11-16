@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/ros_mbrb/install
+
+Name: serial_stm
+Description: Description of serial_stm
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

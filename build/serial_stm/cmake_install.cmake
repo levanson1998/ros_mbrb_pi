@@ -1,4 +1,4 @@
-# Install script for directory: /home/ubuntu/ros_mbrb/src/serial_pub
+# Install script for directory: /home/ubuntu/ros_mbrb/src/serial_stm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,25 +33,21 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_pub.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ubuntu/ros_mbrb/build/serial_stm/catkin_generated/installspace/serial_stm.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/serial_pub/cmake" TYPE FILE FILES
-    "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_pubConfig.cmake"
-    "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_pubConfig-version.cmake"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/serial_stm/cmake" TYPE FILE FILES
+    "/home/ubuntu/ros_mbrb/build/serial_stm/catkin_generated/installspace/serial_stmConfig.cmake"
+    "/home/ubuntu/ros_mbrb/build/serial_stm/catkin_generated/installspace/serial_stmConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/serial_pub" TYPE FILE FILES "/home/ubuntu/ros_mbrb/src/serial_pub/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/serial_stm" TYPE FILE FILES "/home/ubuntu/ros_mbrb/src/serial_stm/package.xml")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/serial_pub" TYPE PROGRAM FILES "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_pub.py")
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/serial_pub" TYPE PROGRAM FILES "/home/ubuntu/ros_mbrb/build/serial_pub/catkin_generated/installspace/serial_stm.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/serial_stm" TYPE PROGRAM FILES "/home/ubuntu/ros_mbrb/build/serial_stm/catkin_generated/installspace/serial_stm.py")
 endif()
 

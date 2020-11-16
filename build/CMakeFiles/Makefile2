@@ -1105,6 +1105,24 @@ clean: turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory serial_stm
+
+# Convenience name for "all" pass in the directory.
+serial_stm/all:
+
+.PHONY : serial_stm/all
+
+# Convenience name for "clean" pass in the directory.
+serial_stm/clean:
+
+.PHONY : serial_stm/clean
+
+# Convenience name for "preinstall" pass in the directory.
+serial_stm/preinstall:
+
+.PHONY : serial_stm/preinstall
+
+#=============================================================================
 # Directory level rules for directory hls_lfcd_lds_driver
 
 # Convenience name for "all" pass in the directory.
