@@ -29,7 +29,7 @@ def serialInit():
 
 def sendSerial(velo_r, velo_l, dir_):
     global ser
-    # print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(velo_r, velo_l, dir_))
+    print("\nvelo_r: {} \nvelo_l: {} \ndir_: {}".format(round(velo_r, 6), round(velo_l, 6), round(dir_, 6)))
     velo_l1 = int(velo_l)
     velo_l2 = int(round((velo_l-velo_l1)*10000))
 
@@ -57,9 +57,10 @@ def receiveSerial():
     global ser
     try:
         data=ser.read(25)
-        rospy.loginfo("")
+        # rospy.loginfo("")
+        # print("data: {}".format(data))
         # print("data[-1]: {}, data[-2]: {}".format(data[-1], data[-2]))
-        if not (data[-1]==127) and (data[-2]==27):
+        if not ((data[-1]==27) and (data[0]==127)):
             print(create_error)
         # data = ser.readline(-1)
         # ser.flush()
@@ -98,13 +99,13 @@ def processDataSer(data):
     # print(data)
     # print(len(data))
     dataRecv=[]
-    dataRecv.append(int.from_bytes(data[0:2], 'big', signed=True))
-    dataRecv.append(int.from_bytes(data[2:4], 'big', signed=True))
-    for i in range(4, 13, 3):
+    dataRecv.append(int.from_bytes(data[1:3], 'big', signed=True))
+    dataRecv.append(int.from_bytes(data[3:5], 'big', signed=True))
+    for i in range(5, 14, 3):
         dataRecv.append(int.from_bytes(data[i:i+3], 'big', signed=True)/1000)
-    for i in range(13, 22, 3):
+    for i in range(14, 23, 3):
         dataRecv.append(int.from_bytes(data[i:i+3], 'big', signed=True)/1000)
-    dataRecv.append(data[22])
+    dataRecv.append(data[23])
     dataRecv.append(0.0) # th
     dataRecv.append(0.0) # x
     dataRecv.append(0.0) # y
@@ -163,9 +164,8 @@ def main():
         x += delta_x
         y += delta_y
         th += delta_th
-        # print("\033c")
+        
         # print(len(get_ser))
-        # print("\nv_right: {}\nv_left: {}\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)".format(v_right, v_left, vx, vy, vth, delta_x, delta_y, delta_y, x, y, th))
 
         get_ser[-1] = vth
         get_ser[-2] = vy
@@ -175,11 +175,17 @@ def main():
         get_ser[-6] = th
 
         # print("putser: {}".format(put_ser))
+        print("\033c")
+        rospy.loginfo("\nv_right: {}\nv_left: {}\nvx: {}\nvy: {}\nvth: {}\ndelta_x: {}\ndelta_y: {}\ndelta_th: {}\nx: {}\ny: {}\nth: {} (dec)\
+            \nimu_ax: {}\nimu_ay:{}\nimu_az: {}\nimu_gx: {}\nimu_gy: {}\nimu_gz: {}"\
+            .format(v_right, v_left, vx, vy, vth, delta_x, delta_y, delta_th, round(x, 4), round(y, 4), round(th, 4), \
+                round(get_ser[2], 4), round(get_ser[3], 4), round(get_ser[4], 4), round(get_ser[5], 4), round(get_ser[6], 4), round(get_ser[7], 4)))
         try:
             sendSerial(put_ser[0],put_ser[1], put_ser[2])
+            
+
         except:
             pass
- 
         floatarray.data=get_ser
         serial_pub.publish(floatarray)
         # print("serial_pub !!")

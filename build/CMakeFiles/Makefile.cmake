@@ -40,7 +40,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/ubuntu/ros_mbrb/src/rplidar_ros/package.xml"
   "/home/ubuntu/ros_mbrb/src/serial_pub/CMakeLists.txt"
   "/home/ubuntu/ros_mbrb/src/serial_pub/package.xml"
-  "/home/ubuntu/ros_mbrb/src/serial_pub/scripts/clock_pub.py"
   "/home/ubuntu/ros_mbrb/src/serial_pub/scripts/serial_pub.py"
   "/home/ubuntu/ros_mbrb/src/serial_pub/scripts/serial_stm.py"
   "/home/ubuntu/ros_mbrb/src/serial_stm/CMakeLists.txt"

@@ -223,7 +223,6 @@ int main(int argc, char * argv[]) {
         drv = RPlidarDriver::CreateDriver(rp::standalone::rplidar::DRIVER_TYPE_SERIALPORT);
     }
 
-    
     if (!drv) {
         ROS_ERROR("Create Driver fail, exit");
         return -2;
@@ -347,7 +346,7 @@ int main(int argc, char * argv[]) {
                             }
                         }
                     }
-                    // ROS_INFO("angle_min: %.1f, angle_max: %.1f", angle_min, angle_max);
+                    ROS_INFO("angle_min: %.1f, angle_max: %.1f", angle_min, angle_max);
                     publish_scan(&scan_pub, angle_compensate_nodes, angle_compensate_nodes_count,
                              start_scan_time, scan_duration, inverted,
                              angle_min, angle_max, max_distance,
@@ -364,7 +363,7 @@ int main(int argc, char * argv[]) {
 
                     angle_min = DEG2RAD(getAngle(nodes[start_node]));
                     angle_max = DEG2RAD(getAngle(nodes[end_node]));
-                    // ROS_INFO("angle_min2: %.1f, angle_max2: %.1f", angle_min, angle_max);
+                    ROS_INFO("angle_min2: %.1f, angle_max2: %.1f", angle_min, angle_max);
 
                     publish_scan(&scan_pub, &nodes[start_node], end_node-start_node +1,
                              start_scan_time, scan_duration, inverted,

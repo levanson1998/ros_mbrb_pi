@@ -89,8 +89,6 @@ def main():
         x = data_ser[-5]
         th = data_ser[-6]
 
-        # print("\033c")
-        rospy.loginfo("\nvx: {}\nvy: {}\nvth: {}\nx: {}\ny: {}\nth: {}".format(vx, vy, vth, x, y, th))
         for i in range(2, 8, 1):
             prt+="\ndata: {}".format(data_ser[i])
         # print(prt)
@@ -103,21 +101,20 @@ def main():
         joint_state_.header.frame_id='base_link'
         joint_state_.name=["wheel_left_joint", "wheel_right_joint"]
         joint_state_.position=[0,0]
-        joint_state_.velocity=[0.1,0.1]
-        joint_state_.effort=[0.1,0.1]
+        joint_state_.velocity=[0.0,0.0]
+        joint_state_.effort=[0.0,0.0]
 
         # odom_squat = Quaternion(*(tf_conversions.transformations.quaternion_from_euler(0, 0, th)))
         odom_squat = Quaternion(*(transformations.quaternion_from_euler(0,0,th)))
-        print("\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}".format(odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
 
         transform_ = TransformStamped()
         transform_.header.stamp=stamp
         transform_.header.frame_id='odom'
-        transform_.child_frame_id='base_link'
         # transform_.child_frame_id='base_link'
+        transform_.child_frame_id='base_footprint'
         transform_.transform.translation.x=x
         transform_.transform.translation.y=y
-        transform_.transform.translation.z=0.0
+        transform_.transform.translation.z=0.1
         transform_.transform.rotation.x = odom_squat.x
         transform_.transform.rotation.y = odom_squat.y
         transform_.transform.rotation.z = odom_squat.z
@@ -137,7 +134,7 @@ def main():
         odom_.pose.pose.position.z=0
         odom_.pose.pose.orientation=odom_squat
 
-        odom_.child_frame_id='base_link'
+        odom_.child_frame_id='base_footprint'
         odom_.twist.twist.linear.x=vx
         odom_.twist.twist.linear.y=vy
         odom_.twist.twist.linear.z=0
@@ -156,13 +153,18 @@ def main():
         imu_.angular_velocity.y=data_ser[6]
         imu_.angular_velocity.z=data_ser[7]
 
-        # Imu_pub.publish(imu_)
+        Imu_pub.publish(imu_)
         Odom_pub.publish(odom_)
         SensorState_pub.publish(ss_State_)
         JointState_pub.publish(joint_state_)
         if rospy.is_shutdown():
             rospy.loginfo("stop serial publisher")
             break
+        print("\033c")
+        rospy.loginfo("\nvx: {}\nvy: {}\nvth: {}\nx: {}\ny: {}\nth: {}\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}"\
+            .format(vx, vy, vth, x, y, th, odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
+        # print("\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}".format(odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
+
 
 
 if __name__=="__main__":
