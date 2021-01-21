@@ -431,6 +431,12 @@ hls_lfcd_lds_driver_BINARY_DIR:STATIC=/home/ubuntu/ros_mbrb/build/hls_lfcd_lds_d
 //Value Computed by CMake
 hls_lfcd_lds_driver_SOURCE_DIR:STATIC=/home/ubuntu/ros_mbrb/src/hls_lfcd_lds_driver
 
+//Value Computed by CMake
+init_robot_BINARY_DIR:STATIC=/home/ubuntu/ros_mbrb/build/init_robot
+
+//Value Computed by CMake
+init_robot_SOURCE_DIR:STATIC=/home/ubuntu/ros_mbrb/src/init_robot
+
 //Path to a library.
 lib:FILEPATH=/opt/ros/kinetic/lib/libxmlrpcpp.so
 
@@ -760,7 +766,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=10
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

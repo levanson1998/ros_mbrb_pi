@@ -1,0 +1,11 @@
+<launch>
+  <!-- Turtlebot3 -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch">
+  </include>
+
+    <node pkg="serial_pub" name="serial_pub" type="serial_pub.py" output="log"> 
+    </node>
+
+    <node pkg="serial_stm" name="serial_stm" type="serial_stm.py" output="log"> 
+    </node>
+</launch>

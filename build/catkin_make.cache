@@ -1,2 +1,2 @@
-hls_lfcd_lds_driver:rplidar_ros:serial_pub:serial_stm:turtlebot3/turtlebot3:turtlebot3/turtlebot3_bringup:turtlebot3_msgs
+hls_lfcd_lds_driver:init_robot:rplidar_ros:serial_pub:serial_stm:turtlebot3/turtlebot3:turtlebot3/turtlebot3_bringup:turtlebot3_msgs
 -DCATKIN_DEVEL_PREFIX=/home/ubuntu/ros_mbrb/devel -DCMAKE_INSTALL_PREFIX=/home/ubuntu/ros_mbrb/install -G Unix Makefiles

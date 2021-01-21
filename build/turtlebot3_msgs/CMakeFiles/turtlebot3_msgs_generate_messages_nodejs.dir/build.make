@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/ubuntu/ros_mbrb/build
 include turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs.dir/progress.make
 
 turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/SensorState.js
-turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js
 turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/Sound.js
+turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js
 
 
 /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/SensorState.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -64,20 +64,20 @@ turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs: /home/ubunt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ubuntu/ros_mbrb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from turtlebot3_msgs/SensorState.msg"
 	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/SensorState.msg -Iturtlebot3_msgs:/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p turtlebot3_msgs -o /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg
 
-/home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
-/home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js: /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ubuntu/ros_mbrb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from turtlebot3_msgs/VersionInfo.msg"
-	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg -Iturtlebot3_msgs:/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p turtlebot3_msgs -o /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg
-
 /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/Sound.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/Sound.js: /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ubuntu/ros_mbrb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from turtlebot3_msgs/Sound.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ubuntu/ros_mbrb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from turtlebot3_msgs/Sound.msg"
 	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg -Iturtlebot3_msgs:/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p turtlebot3_msgs -o /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg
+
+/home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js: /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ubuntu/ros_mbrb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from turtlebot3_msgs/VersionInfo.msg"
+	cd /home/ubuntu/ros_mbrb/build/turtlebot3_msgs && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg -Iturtlebot3_msgs:/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p turtlebot3_msgs -o /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg
 
 turtlebot3_msgs_generate_messages_nodejs: turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs
 turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/SensorState.js
-turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js
 turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/Sound.js
+turtlebot3_msgs_generate_messages_nodejs: /home/ubuntu/ros_mbrb/devel/share/gennodejs/ros/turtlebot3_msgs/msg/VersionInfo.js
 turtlebot3_msgs_generate_messages_nodejs: turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_generate_messages_nodejs.dir/build.make
 
 .PHONY : turtlebot3_msgs_generate_messages_nodejs

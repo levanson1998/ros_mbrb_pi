@@ -45,13 +45,13 @@ _generate_msg_cpp(turtlebot3_msgs
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_cpp(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_cpp(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtlebot3_msgs
@@ -94,13 +94,13 @@ _generate_msg_eus(turtlebot3_msgs
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_eus(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_eus(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtlebot3_msgs
@@ -143,13 +143,13 @@ _generate_msg_lisp(turtlebot3_msgs
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_lisp(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_lisp(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtlebot3_msgs
@@ -192,13 +192,13 @@ _generate_msg_nodejs(turtlebot3_msgs
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_nodejs(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_nodejs(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtlebot3_msgs
@@ -241,13 +241,13 @@ _generate_msg_py(turtlebot3_msgs
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_py(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtlebot3_msgs
 )
 _generate_msg_py(turtlebot3_msgs
-  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/Sound.msg"
+  "/home/ubuntu/ros_mbrb/src/turtlebot3_msgs/msg/VersionInfo.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtlebot3_msgs

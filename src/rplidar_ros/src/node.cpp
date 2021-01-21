@@ -101,6 +101,14 @@ void publish_scan(ros::Publisher *pub,
             scan_msg.intensities[node_count-1-i] = (float) (nodes[i].quality >> 2);
         }
     }
+    float ranges_temp;
+    for (size_t i = 0; i < node_count/2; i++) {
+        ranges_temp = scan_msg.ranges[i];
+        scan_msg.ranges[i] = scan_msg.ranges[node_count/2+i];
+        scan_msg.ranges[node_count/2+i]=ranges_temp;
+    }
+    
+    // ROS_INFO("node_count %d", node_count);
 
     pub->publish(scan_msg);
 }
@@ -299,8 +307,8 @@ int main(int argc, char * argv[]) {
         if(angle_compensate_multiple < 1) 
           angle_compensate_multiple = 1;
         max_distance = current_scan_mode.max_distance;
-        ROS_INFO("current scan mode: %s, max_distance: %.1f m, Point number: %.1fK , angle_compensate: %d",  current_scan_mode.scan_mode,
-                 current_scan_mode.max_distance, (1000/current_scan_mode.us_per_sample), angle_compensate_multiple);
+        // ROS_INFO("current scan mode: %s, max_distance: %.1f m, Point number: %.1fK , angle_compensate: %d",  current_scan_mode.scan_mode,
+                //  current_scan_mode.max_distance, (1000/current_scan_mode.us_per_sample), angle_compensate_multiple);
     }
     else
     {
@@ -346,7 +354,7 @@ int main(int argc, char * argv[]) {
                             }
                         }
                     }
-                    ROS_INFO("angle_min: %.1f, angle_max: %.1f", angle_min, angle_max);
+                    // ROS_INFO("angle_min: %.1f, angle_max: %.1f", angle_min, angle_max);
                     publish_scan(&scan_pub, angle_compensate_nodes, angle_compensate_nodes_count,
                              start_scan_time, scan_duration, inverted,
                              angle_min, angle_max, max_distance,
@@ -363,7 +371,7 @@ int main(int argc, char * argv[]) {
 
                     angle_min = DEG2RAD(getAngle(nodes[start_node]));
                     angle_max = DEG2RAD(getAngle(nodes[end_node]));
-                    ROS_INFO("angle_min2: %.1f, angle_max2: %.1f", angle_min, angle_max);
+                    // ROS_INFO("angle_min2: %.1f, angle_max2: %.1f", angle_min, angle_max);
 
                     publish_scan(&scan_pub, &nodes[start_node], end_node-start_node +1,
                              start_scan_time, scan_duration, inverted,

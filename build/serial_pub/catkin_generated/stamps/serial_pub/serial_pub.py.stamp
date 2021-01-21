@@ -58,6 +58,7 @@ def main():
     last_time = rospy.Time.now()
     tt1 = time.time()
     rospy.Subscriber('serial', Float32MultiArray, serial_stm_Callback, queue_size=10)
+    show=0
     while(True):
         # rospy.loginfo("")
         # print(time.time()-tt1)
@@ -89,6 +90,7 @@ def main():
         x = data_ser[-5]
         th = data_ser[-6]
 
+
         for i in range(2, 8, 1):
             prt+="\ndata: {}".format(data_ser[i])
         # print(prt)
@@ -104,8 +106,37 @@ def main():
         joint_state_.velocity=[0.0,0.0]
         joint_state_.effort=[0.0,0.0]
 
+        # print(transform_)
+
+        odom_=Odometry()
+        
+        odom_.header.stamp=stamp
+        odom_.header.frame_id='odom'
+        
+        odom_.pose.pose.position.x=x
+        odom_.pose.pose.position.y=y
+        odom_.pose.pose.position.z=0
+        # odom_.pose.pose.orientation.x=0
+        # odom_.pose.pose.orientation.y=0
+        # odom_.pose.pose.orientation.z=3.142
+        # odom_.pose.pose.orientation.w=0
+
         # odom_squat = Quaternion(*(tf_conversions.transformations.quaternion_from_euler(0, 0, th)))
         odom_squat = Quaternion(*(transformations.quaternion_from_euler(0,0,th)))
+
+        odom_.pose.pose.orientation.x = odom_squat.x
+        odom_.pose.pose.orientation.y = odom_squat.y
+        odom_.pose.pose.orientation.z = odom_squat.z
+        odom_.pose.pose.orientation.w = odom_squat.w
+
+        odom_.child_frame_id='base_footprint'
+        odom_.twist.twist.linear.x=vx
+        odom_.twist.twist.linear.y=0
+        odom_.twist.twist.linear.z=0
+        odom_.twist.twist.angular.x=0
+        odom_.twist.twist.angular.y=0
+        odom_.twist.twist.angular.z=vth
+
 
         transform_ = TransformStamped()
         transform_.header.stamp=stamp
@@ -120,27 +151,6 @@ def main():
         transform_.transform.rotation.z = odom_squat.z
         transform_.transform.rotation.w = odom_squat.w
 
-        # print(transform_)
-
-        odom_broadcaster.sendTransform([transform_])
-
-        odom_=Odometry()
-        
-        odom_.header.stamp=stamp
-        odom_.header.frame_id='odom'
-        
-        odom_.pose.pose.position.x=x
-        odom_.pose.pose.position.y=y
-        odom_.pose.pose.position.z=0
-        odom_.pose.pose.orientation=odom_squat
-
-        odom_.child_frame_id='base_footprint'
-        odom_.twist.twist.linear.x=vx
-        odom_.twist.twist.linear.y=vy
-        odom_.twist.twist.linear.z=0
-        odom_.twist.twist.angular.x=0
-        odom_.twist.twist.angular.y=0
-        odom_.twist.twist.angular.z=vth
 
         # transformer_.sendTransform(transform_)
 
@@ -155,16 +165,19 @@ def main():
 
         Imu_pub.publish(imu_)
         Odom_pub.publish(odom_)
+        odom_broadcaster.sendTransform([transform_])
         SensorState_pub.publish(ss_State_)
         JointState_pub.publish(joint_state_)
         if rospy.is_shutdown():
             rospy.loginfo("stop serial publisher")
             break
-        print("\033c")
-        rospy.loginfo("\nvx: {}\nvy: {}\nvth: {}\nx: {}\ny: {}\nth: {}\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}"\
-            .format(vx, vy, vth, x, y, th, odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
-        # print("\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}".format(odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
-
+        if (show == 50):
+            show=0
+            print("\033c")
+            rospy.loginfo("\nvx: {}\nvy: {}\nvth: {}\nx: {}\ny: {}\nth: {}\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}"\
+                .format(vx, vy, vth, x, y, th, odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
+            # print("\nodom_squat.x: {}\nodom_squat.y: {}\nodom_squat.z: {}\nodom_squat.w: {}".format(odom_squat.x, odom_squat.y, odom_squat.z, odom_squat.w))
+        show+=1
 
 
 if __name__=="__main__":
